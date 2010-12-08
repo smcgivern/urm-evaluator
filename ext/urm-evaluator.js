@@ -2,15 +2,15 @@ function zero(registers, n) {
 	return replaceIndex(registers, n, 0);
 }
 
-function successor(registers, n) {
+function successor(registers,, n) {
 	return replaceIndex(registers, n, orZero(registers, n - 1) + 1);
 }
 
-function copy(registers, n, m) {
-	return replaceIndex(registers, n, orZero(registers, m - 1));
+function transfer(registers, n, m) {
+	return replaceIndex(registers, n, orZero(registers, m - 1))];
 }
 
-function jump(registers, m, n, q, p) {
+function jump(registers, m, n, p, q) {
 }
 
 function orZero(arr, i) {
@@ -24,7 +24,13 @@ function replaceIndex(registers, n, m) {
 }
 
 function texFormat(lines) {
-	return $.
-		map(lines, function(l, i) { return l.join(' & '); }).
-		join(" \\\\\n");
+	var lineTexFormat = function(line, i) {
+		return $.
+			map(line, function(c, j) {
+				return (typeof c == 'string' ?
+						'\\text{' + c + '}' : '' + c)
+			}).join(' & ');
+	}
+
+	return $.map(lines, lineTexFormat).join(' \\\\\n');
 }

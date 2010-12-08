@@ -33,17 +33,17 @@ new Test.Unit.Runner({
 		assert(arrayEqual(successor([2, 3, 4], 5), [2, 3, 4, , 1]));
 	}},
 
-	testCopy: function() { with(this) {
-		assert(arrayEqual(copy([2, 3, 4], 2, 1), [2, 2, 4]));
-		assert(arrayEqual(copy([2, 3, 4], 2, 5), [2, 0, 4]));
+	testTransfer: function() { with(this) {
+		assert(arrayEqual(transfer([2, 3, 4], 2, 1), [2, 2, 4]));
+		assert(arrayEqual(transfer([2, 3, 4], 2, 5), [2, 0, 4]));
 	}},
 
 	testJump: function() { with(this) {
 	}},
 
 	testTexFormat: function() { with(this) {
-		assert(texFormat([['STOP']]) == 'STOP');
-		assert(texFormat([[1, 2], [3]]) == "1 & 2 \\\\\n3");
-		assert(texFormat([['a'], ['b', 'c']]) == "a \\\\\nb & c");
+		assert(texFormat([['STOP']]) == '\\text{STOP}');
+		assert(texFormat([[1, 2], [3]]) == '1 & 2 \\\\\n3');
+		assert(texFormat([['a'], [2, 'c']]) == '\\text{a} \\\\\n2 & \\text{c}');
 	}},
 });
