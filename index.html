@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>URM (unlimited register machine) evaluator</title>
+    <link href="/ext/global.css" rel="stylesheet" type="text/css">
+    <link href="ext/style.css" rel="stylesheet" type="text/css">
+    <script src="ext/jquery.js" type="text/javascript"></script>
+    <script src="ext/jquery-ui.js" type="text/javascript"></script>
+    <script src="ext/legendre.js" type="text/javascript"></script>
+    <script src="ext/display-legendre.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <h1 id="title">
+	  <abbr title="unlimited register machine">URM</abbr> evaluator
+	</h1>
+    <div id="instructions">
+      <h2>
+		Available
+        <a href="http://planetmath.org/encyclopedia/UnlimitedRegisterMachine.html">
+          URM instructions
+        </a>
+      </h2>
+      <p>
+        <span id="p-odd-prime"><i>p</i> is an odd prime</span>,
+        <span id="a-not-congruent-p"><i>a</i> &#x2262; 0 (mod <i>p</i>)</span>
+        and <i>b</i> &#x2262; 0 (mod <i>p</i>),
+        and <i>q</i> &ne; <i>p</i> is an odd prime.
+      </p>
+
+      <dl>
+        <dt id="zero">Zero</dt>
+        <dd>
+		  <i>Z</i>(<i>n</i>) sets <i>r<sub>n</sub></i> = 0
+        </dd>
+
+        <dt id="successor">Successor</dt>
+        <dd>
+		  <i>S</i>(<i>n</i>) increments <i>r<sub>n</sub></i>, giving
+		  <i>r<sub>n</sub></i> = <i>r<sub>n</sub></i> + 1
+        </dd>
+
+        <dt id="transfer">Transfer (copy)</dt>
+        <dd>
+		  <i>T</i>(<i>m</i>, <i>n</i>) (or <i>C</i>(<i>m</i>, <i>n</i>))
+		  sets <i>r<sub>n</sub></i> = <i>r<sub>m</sub></i>
+        </dd>
+
+        <dt id="jump">Jump</dt>
+        <dd>
+		  <i>J</i>(<i>m</i>, <i>n</i>, <i>p</i>)
+        </dd>
+      </dl>
+    </div>
+    <div id="content">
+      <h2>Evaluate</h2>
+      <form action="javascript:void(0);" id="form">
+        <p>
+          (<input id="x" size="1"> | <input id="y" size="1">)
+          <input type="submit" value="Evaluate">
+        </p>
+      </form>
+      <div id="results"></div>
+    </div>
+  </body>
+</html>
