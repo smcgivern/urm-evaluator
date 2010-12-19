@@ -11,7 +11,7 @@
   </head>
   <body>
     <h1 id="title">
-	  <abbr title="unlimited register machine">URM</abbr> evaluator
+	  <abbr title="Unlimited register machine">URM</abbr> evaluator
 	</h1>
     <div id="instructions">
       <h2>
@@ -20,13 +20,6 @@
           URM instructions
         </a>
       </h2>
-      <p>
-        <span id="p-odd-prime"><i>p</i> is an odd prime</span>,
-        <span id="a-not-congruent-p"><i>a</i> &#x2262; 0 (mod <i>p</i>)</span>
-        and <i>b</i> &#x2262; 0 (mod <i>p</i>),
-        and <i>q</i> &ne; <i>p</i> is an odd prime.
-      </p>
-
       <dl>
         <dt id="zero">Zero</dt>
         <dd>
@@ -47,7 +40,9 @@
 
         <dt id="jump">Jump</dt>
         <dd>
-		  <i>J</i>(<i>m</i>, <i>n</i>, <i>p</i>)
+		  <i>J</i>(<i>m</i>, <i>n</i>, <i>p</i>) jumps to
+		  instruction <i>p</i> if <i>r<sub>m</sub></i>
+		  = <i>r<sub>n</sub></i>
         </dd>
       </dl>
     </div>
