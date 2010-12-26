@@ -20,6 +20,25 @@ function arrayEqual(x, y) {
     return true;
 };
 
+// http://planetmath.org/?op=getobj&from=objects&id=11933
+var additionProgram = [
+    [allInstructions['j'], [2, 3, 5]],
+    [allInstructions['s'], [1]],
+    [allInstructions['s'], [3]],
+    [allInstructions['j'], [1, 1, 1]],
+    [allInstructions['z'], [3]],
+];
+
+var transferProgram = [
+    [allInstructions['j'], [3, 4, 6]],
+    [allInstructions['z'], [4]],
+    [allInstructions['s'], [4]],
+    [allInstructions['j'], [3, 4, 6]],
+    [allInstructions['j'], [3, 3, 3,]],
+];
+
+var infiniteProgram = [[allInstructions['j'], [1, 1, 1]]];
+
 new Test.Unit.Runner({
     setup: function() {
     },
@@ -47,26 +66,7 @@ new Test.Unit.Runner({
         assert(arrayEqual(j([2, 2, 4], 1, 1, 3, 5), [[2, 2, 4], 1]));
     }},
 
-    // http://planetmath.org/?op=getobj&from=objects&id=11933
     testRunURM: function() { with(this) {
-        var additionProgram = [
-            [j, [2, 3, 5]],
-            [s, [1]],
-            [s, [3]],
-            [j, [1, 1, 1]],
-            [z, [3]]
-        ];
-
-        var transferProgram = [
-            [j, [3, 4, 6]],
-            [z, [4]],
-            [s, [4]],
-            [j, [3, 4, 6]],
-            [j, [3, 3, 3,]]
-        ];
-
-        var infiniteProgram = [[j, [1, 1, 1]]];
-
         assert(arrayEqual(runURM(additionProgram, [3, 2], 1, []).pop(),
                           ['STOP', 5, 2, 0]));
 
@@ -78,6 +78,49 @@ new Test.Unit.Runner({
 
         assert(arrayEqual(runURM(infiniteProgram, [0], 1, []).pop(),
                           ['STOP', 'No end after 1000 steps']));
+    }},
+
+    testDisplayURM: function() { with(this) {
+        var additionProgramText = [
+            'J(2, 3, 5)', 'S(1)', 'S(3)', 'J(1, 1, 1)', 'Z(3)'
+        ].join('\n');
+
+        var transferProgramText = [
+            'J(3, 4, 6)', 'Z(4)', 'S(4)', 'J(3, 4, 6)', 'J(3, 3, 3)',
+        ].join('\n');
+
+        var infiniteProgramText = 'J(1, 1, 1)';
+
+        assert(displayURM(additionProgram) == additionProgramText);
+        assert(displayURM(transferProgram) == transferProgramText);
+        assert(displayURM(infiniteProgram) == infiniteProgramText);
+    }},
+
+    testParseURM: function() { with(this) {
+        var resultProgram = [
+            [allInstructions['j'], [2, 3, 5]],
+            [allInstructions['s'], [1]],
+            [allInstructions['s'], [3]],
+            [allInstructions['j'], [1, 1, 1]],
+            [allInstructions['z'], [3]],
+            [allInstructions['t'], [1, 3]],
+            [allInstructions['t'], [1, 3]],
+        ];
+
+        var inputProgram = [
+            'jump(2, 3, 5)',
+            '',
+            'gaps and invalid lines ignored',
+            'zero(5, 6, 7)',
+            'successor(1)',
+            'S3',
+            'JIMP(1, 1, 1)',
+            'zoo3',
+            'copy 1\t3',
+            'T(1, 3)',
+        ].join('\n');
+
+        assert(arrayEqual(parseURM(inputProgram), resultProgram));
     }},
 
     testFillZeroes: function() { with(this) {
