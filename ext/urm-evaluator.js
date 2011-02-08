@@ -88,7 +88,7 @@ function fillZeroes(lines) {
         return function(array) {
             var newArray = array.slice(0);
 
-            for (i = 0; i < length; i++) {
+            for (var i = 0; i < length; i++) {
                 if (typeof newArray[i] != 'string') {
                     newArray[i] = orZero(newArray, i);
                 }
