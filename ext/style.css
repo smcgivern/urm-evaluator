@@ -1,0 +1,8 @@
+.controls {
+    float: right;
+    font-size: small;
+}
+
+.click {
+    cursor: pointer;
+}
