@@ -9,10 +9,10 @@ var samplePrograms = [
 ];
 
 var formats = [
-    // TODO: tableFormat
-    {'id': 'default', 'name': 'table format', 'function': 'tableFormat'},
-    {'id': 'tex', 'name': 'TeX format', 'function': texFormat},
-    {'id': 'plain', 'name': 'plain text format', 'function': plainTextFormat}
+    {'id': 'default', 'name': 'table format', 'function': tableFormat},
+    {'id': 'tex', 'name': 'TeX format', 'function': wrappedTexFormat},
+    {'id': 'plain', 'name': 'plain text format',
+     'function': wrappedPlainTextFormat}
 ]
 
 var registerRowSize = 5;
@@ -26,13 +26,8 @@ function element(name, attributes, content) {
     return e;
 }
 
-// http://answers.oreilly.com/topic/2353-5-things-you-might-not-know-about-jquery/
-
 // onload:
-//  - add collapse elements after all h2s - DONE!
 //  - add list of sample programs
-//  - add first row of registers and button to add further registers - DONE!
-//  - insert onchange function for registers -> evaluates program - DONE!
 //  - insert onchange function for program -> parses, displays in textarea,
 //    and evaluates program
 // evaluate:
@@ -50,24 +45,6 @@ function addControls() {
     expandCollapseHeader(collapse, 'collapse', true);
 
     $('h2').append(controls.append('[ ').append(collapse).append(' ]'));
-}
-
-function collapseHeader() { expandCollapseHeader(this, 'collapse'); }
-function expandHeader() { expandCollapseHeader(this, 'expand'); }
-
-function expandCollapseHeader(elem, mode, arrowsOnly) {
-    var details = {
-        'expand': {'arrow': '&#x21e9;', 'click': collapseHeader},
-        'collapse': {'arrow': '&#x21e7;', 'click': expandHeader}
-    };
-
-    $(elem).html(details[mode]['arrow']);
-    $(elem).unbind();
-    $(elem).click(details[mode]['click']);
-
-    if (!arrowsOnly) {
-        $(elem.parentNode.parentNode.parentNode).children(':not(h2)').toggle();
-    }
 }
 
 function addRegisterRow() {
@@ -103,14 +80,11 @@ function addRegisterRow() {
     $('#registers').append(row);
 }
 
-function removeRegisterRow() { $('#registers>div').last().remove(); }
-
+// TODO
 function showResults() {
-    var element = $('#results');
+    var resultsDiv = $('#output');
 
-    element.empty();
-    element.append('<h3>Evaluation results</h3>');
-    elements
+    resultsDiv.empty();
 
     showFormats(format);
 }
@@ -132,6 +106,26 @@ function showFormats(currentFormat) {
     });
 }
 
+function collapseHeader() { expandCollapseHeader(this, 'collapse'); }
+function expandHeader() { expandCollapseHeader(this, 'expand'); }
+
+function expandCollapseHeader(elem, mode, arrowsOnly) {
+    var details = {
+        'expand': {'arrow': '&#x21e9;', 'click': collapseHeader},
+        'collapse': {'arrow': '&#x21e7;', 'click': expandHeader}
+    };
+
+    $(elem).html(details[mode]['arrow']);
+    $(elem).unbind();
+    $(elem).click(details[mode]['click']);
+
+    if (!arrowsOnly) {
+        $(elem.parentNode.parentNode.parentNode).children(':not(h2)').toggle();
+    }
+}
+
+function removeRegisterRow() { $('#registers>div').last().remove(); }
+
 function changeFormat(newFormat, lines) {
     $.grep(formats, function(format) {
         return (format['id'] == newFormat);
@@ -140,38 +134,14 @@ function changeFormat(newFormat, lines) {
     showFormats(newFormat);
 }
 
-function foo(){
-    var element = $('<ol></ol>');
-    element.addClass('steps');
+// TODO
+function tableFormat(lines) {
+}
 
-    for (var i = 0; i < results.length; i++) {
-        var result = results[i];
-        var item = (i === 0 ? $('<p></p>') : $('<li></li>'));
+// TODO
+function wrappedTexFormat(lines) {
+}
 
-        item.addClass(result.id);
-        item.attr('title', $('#' + result.id).text());
-
-        item.unbind();
-        item.click(function() {
-            $('#' + $(this).attr('class')).effect('highlight', {}, 3000);
-        });
-
-        if ($.isArray(result)) {
-            attachResultsSublist(item, result);
-        } else {
-            if (result.next[0] === 0) {
-                item.append('Check failed: ' + item.attr('title') + '.');
-            } else if (result.next[1] === 0) {
-                item.append(e(i, result) + p(result.next[0]));
-            } else {
-                item.append(e(i, result) +
-                            legendreSymbol(result.next[0],
-                                           result.next[1]));
-            }
-        }
-
-        (i === 0 ? parent.append(item) : element.append(item));
-    }
-
-    parent.append(element);
+// TODO
+function wrappedPlainTextFormat(lines) {
 }
