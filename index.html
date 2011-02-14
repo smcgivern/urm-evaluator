@@ -10,50 +10,53 @@
   </head>
   <body>
     <h1 id="title">
-	  <abbr title="Unlimited register machine">URM</abbr> evaluator
-	</h1>
+      <abbr title="Unlimited register machine">URM</abbr> evaluator
+    </h1>
     <div id="instructions">
       <h2>
-		Available
-        <a href="http://planetmath.org/encyclopedia/UnlimitedRegisterMachine.html">
-          URM instructions
-        </a>
+        Available
+        <a href="http://planetmath.org/encyclopedia/UnlimitedRegisterMachine.html">URM instructions</a>
       </h2>
       <dl>
         <dt id="zero">Zero</dt>
         <dd>
-		  <i>Z</i>(<i>n</i>) sets <i>r<sub>n</sub></i> = 0
+          <i>Z</i>(<i>n</i>) sets <i>r<sub>n</sub></i> = 0
         </dd>
 
         <dt id="successor">Successor</dt>
         <dd>
-		  <i>S</i>(<i>n</i>) increments <i>r<sub>n</sub></i>, giving
-		  <i>r<sub>n</sub></i> = <i>r<sub>n</sub></i> + 1
+          <i>S</i>(<i>n</i>) increments <i>r<sub>n</sub></i>, giving
+          <i>r<sub>n</sub></i> = <i>r<sub>n</sub></i> + 1
         </dd>
 
         <dt id="transfer">Transfer (copy)</dt>
         <dd>
-		  <i>T</i>(<i>m</i>, <i>n</i>) (or <i>C</i>(<i>m</i>, <i>n</i>))
-		  sets <i>r<sub>n</sub></i> = <i>r<sub>m</sub></i>
+          <i>T</i>(<i>m</i>, <i>n</i>) (or <i>C</i>(<i>m</i>, <i>n</i>))
+          sets <i>r<sub>n</sub></i> = <i>r<sub>m</sub></i>
         </dd>
 
         <dt id="jump">Jump</dt>
         <dd>
-		  <i>J</i>(<i>m</i>, <i>n</i>, <i>p</i>) jumps to
-		  instruction <i>p</i> if <i>r<sub>m</sub></i>
-		  = <i>r<sub>n</sub></i>
+          <i>J</i>(<i>m</i>, <i>n</i>, <i>p</i>) jumps to
+          instruction <i>p</i> if <i>r<sub>m</sub></i>
+          = <i>r<sub>n</sub></i>
         </dd>
       </dl>
     </div>
-    <div id="content">
-      <h2>Evaluate</h2>
-      <form action="javascript:void(0);" id="form">
-        <p>
-          (<input id="x" size="1"> | <input id="y" size="1">)
-          <input type="submit" value="Evaluate">
-        </p>
-      </form>
-      <div id="results"></div>
+    <div id="samples">
+      <h2>Sample programs</h2>
+    </div>
+    <form id="urm-evaluator">
+      <div id="registers">
+        <h2>Registers</h2>
+      </div>
+      <div id="program">
+        <h2>Program</h2>
+        <textarea></textarea>
+      </div>
+    </form>
+    <div id="output">
+      <h2>Output</h2>
     </div>
   </body>
 </html>
