@@ -31,10 +31,8 @@ function replaceIndex(func, name) {
     return newFunction;
 }
 
-function runURM(program, registers, i, log, logging) {
+function runURM(program, registers, i, log) {
     function newLog(x) { return log.concat([[x].concat(registers)]); }
-
-    if (logging) { console.log(registers);console.log(i);console.log(); }
 
     if (log.length >= stepLimit) {
         return log.concat([['STOP',
