@@ -83,7 +83,7 @@ function addRegisterRow() {
 }
 
 // TODO
-function showResults() {
+function showResults(format) {
     var program = parseURM($('#program textarea').val());
     var registers = $.map($('#registers input'), function(register) {
         return parseInt('0' + $(register).val().replace(/\D/g, ''), 10);
@@ -124,11 +124,11 @@ function changeFormat(newFormat, lines) {
 
     results.empty();
     results.append(format['function'].apply(this, lines));
-    showFormats(newFormat);
+    showFormats(newFormat, line);
 }
 
 // TODO
-function showFormats(currentFormat) {
+function showFormats(currentFormat, lines) {
     var links = [];
 
     $.each(formats, function(format) {
@@ -136,7 +136,7 @@ function showFormats(currentFormat) {
             var link = element('span', {'class': 'click'}, format['name']);
 
             link.unbind();
-            link.click(function() { changeFormat(format['id']); });
+            link.click(function() { changeFormat(format['id'], lines); });
             links.push(link);
         }
     });
