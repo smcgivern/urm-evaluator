@@ -44,7 +44,7 @@ function runURM(program, registers, i, log) {
     var args = [registers, i + 1].concat(program[i - 1][1]);
     var result = program[i - 1][0]['function'].apply(this, args);
 
-    return runURM(program, result[0], result[1], newLog(i), logging);
+    return runURM(program, result[0], result[1], newLog(i));
 }
 
 function displayURM(program) {
