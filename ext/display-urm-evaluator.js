@@ -84,28 +84,14 @@ function addRegisterRow() {
 
 // TODO
 function showResults() {
-    var resultsDiv = $('#output');
-
-    resultsDiv.empty();
-
-    showFormats(format);
-}
-
-function showFormats(currentFormat) {
-    var links = [];
-
-    $.each(formats, function(format) {
-        if (format['id'] != 'currentFormat') {
-            var link = $('<span>' + format['name'] + '</span>');
-
-            link.unbind();
-            link.click(function() {
-                changeFormat(format['id']);
-            });
-
-            links.push(link);
-        }
+    var program = parseURM($('#program textarea').val());
+    var registers = $.map($('#registers input'), function(register) {
+        return parseInt('0' + $(register).val().replace(/\D/g, ''), 10);
     });
+
+    var results = runURM(program, registers, 1, []);
+
+    changeFormat(currentFormat, results);
 }
 
 function collapseHeader() { expandCollapseHeader(this, 'collapse'); }
@@ -129,21 +115,41 @@ function expandCollapseHeader(elem, mode, arrowsOnly) {
 function removeRegisterRow() { $('#registers>div').last().remove(); }
 
 function changeFormat(newFormat, lines) {
-    $.grep(formats, function(format) {
+    var results = $('#results');
+    var format = $.grep(formats, function(format) {
         return (format['id'] == newFormat);
-    })[0].apply(this, lines);
+    })[0] || formats[0];
 
+    currentFormat = format['id'];
+
+    results.empty();
+    results.append(format['function'].apply(this, lines));
     showFormats(newFormat);
+}
+
+// TODO
+function showFormats(currentFormat) {
+    var links = [];
+
+    $.each(formats, function(format) {
+        if (format['id'] != 'currentFormat') {
+            var link = element('span', {'class': 'click'}, format['name']);
+
+            link.unbind();
+            link.click(function() { changeFormat(format['id']); });
+            links.push(link);
+        }
+    });
 }
 
 // TODO
 function tableFormat(lines) {
 }
 
-// TODO
 function wrappedTexFormat(lines) {
+    return element('textarea', {}, texFormat(lines));
 }
 
-// TODO
 function wrappedPlainTextFormat(lines) {
+    return element('textarea', {}, plainTextFormat(lines));
 }
