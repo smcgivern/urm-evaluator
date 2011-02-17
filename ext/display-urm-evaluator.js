@@ -9,11 +9,13 @@ var samplePrograms = [
 ];
 
 var formats = [
-    {'id': 'default', 'name': 'table format', 'function': tableFormat},
+    {'id': 'table', 'name': 'table format', 'function': tableFormat},
     {'id': 'tex', 'name': 'TeX format', 'function': wrappedTexFormat},
     {'id': 'plain', 'name': 'plain text format',
      'function': wrappedPlainTextFormat}
 ]
+
+var currentFormat = 'table';
 
 var registerRowSize = 5;
 
