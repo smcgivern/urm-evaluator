@@ -134,16 +134,35 @@ new Test.Unit.Runner({
     }},
 
     testTexFormat: function() { with(this) {
-        assert(texFormat([['STOP']]) == '\\text{STOP}');
-        assert(texFormat([[1, 2], [3]]) == '1 & 2 \\\\\n3 & 0');
+        assert(texFormat([['STOP']]) ==
+               '\\text{Instruction} \\\\\n\\text{STOP}');
+
+        assert(texFormat([[1, 2], [3]]) ==
+               '\\text{Instruction} & r_1 \\\\\n1 & 2 \\\\\n3 & 0');
 
         assert(texFormat([['a'], [2, 'c']]) ==
-               '\\text{a} & 0 \\\\\n2 & \\text{c}');
+               '\\text{Instruction} & r_1 \\\\\n\\text{a} & 0 \\\\\n2 & \\text{c}');
     }},
 
     testPlainTextFormat: function() { with(this) {
-        assert(plainTextFormat([['STOP']]) == 'STOP');
-        assert(plainTextFormat([[1, 2], [3]]) == '1\t2\n3\t0');
-        assert(plainTextFormat([['a'], [2, 'c']]) == 'a\t0\n2\tc');
+        assert(plainTextFormat([['STOP']]) == 'Instruction\nSTOP');
+        assert(plainTextFormat([[1, 2], [3]]) ==
+               'Instruction\tr_1\n1\t2\n3\t0');
+
+        assert(plainTextFormat([['a'], [2, 'c', 'd']])
+               == 'Instruction\tr_1\tr_2\na\t0\t0\n2\tc\td');
+    }},
+
+    testAddHeaderRow: function() { with(this) {
+        var defaultFunction = function(i) { return 'r_' + i; }
+        var identityFunction = function(i) { return '' + i; }
+
+        assert(arrayEqual([['Instruction'], []], addHeaderRow([[]])));
+
+        assert(arrayEqual([['Instruction', 'r_1', 'r_2', 'r_3'], [0, 0, 0, 0]],
+                          addHeaderRow([[0, 0, 0, 0]], defaultFunction)));
+
+        assert(arrayEqual([['Instruction', '1', '2'], [0, 0, 0]],
+                          addHeaderRow([[0, 0, 0]], identityFunction)));
     }},
 });

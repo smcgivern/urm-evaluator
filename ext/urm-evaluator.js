@@ -65,7 +65,9 @@ function parseURM(text) {
 
         for (var i in allInstructions) {
             var match = $.grep(allInstructions[i]['names'], function(name) {
-                return (name[0] == line.match(/[A-z]/)[0].toLowerCase());
+                var firstLetter = line.match(/[A-z]/);
+
+                return (firstLetter && name[0] == firstLetter[0].toLowerCase());
             });
 
             if (match[0]) { var instruction = allInstructions[i]; break; }
@@ -105,16 +107,30 @@ function texFormat(lines) {
     function texFormatLine(line, i) {
         return $.
             map(line, function(cell, j) {
-                return (typeof cell == 'string' ?
+                return ((typeof cell == 'string' && cell.charAt(0) != 'r') ?
                         '\\text{' + cell + '}' : '' + cell)
             }).join(' & ');
     }
 
-    return $.map(fillZeroes(lines), texFormatLine).join(' \\\\\n');
+    var filledLines = addHeaderRow(fillZeroes(lines),
+                                   function(i) { return 'r_' + i; });
+
+    return $.map(filledLines, texFormatLine).join(' \\\\\n');
 }
 
 function plainTextFormat(lines) {
     function plainTextFormatLine(l) { return l.join('\t'); }
 
-    return $.map(fillZeroes(lines), plainTextFormatLine).join('\n');
+    var filledLines = addHeaderRow(fillZeroes(lines),
+                                   function(i) { return 'r_' + i; });
+
+    return $.map(filledLines, plainTextFormatLine).join('\n');
+}
+
+function addHeaderRow(lines, func) {
+    var header = ['Instruction'];
+
+    for (var i = 1; i < lines[0].length; i++) { header.push(func(i)); }
+
+    return [header].concat(lines);
 }
