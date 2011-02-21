@@ -122,22 +122,23 @@ function changeFormat(newFormat, lines) {
 
     results.empty();
     results.append(format['function'].apply(this, lines));
-    showFormats(newFormat, line);
+    results.append(showFormats(newFormat, lines));
 }
 
-// TODO
 function showFormats(currentFormat, lines) {
-    var links = [];
+    var links = element('ul', {'id': 'formats'});
 
-    $.each(formats, function(format) {
-        if (format['id'] != 'currentFormat') {
+    $.each(formats, function(i, format) {
+        if (format['id'] != currentFormat) {
             var link = element('span', {'class': 'click'}, format['name']);
 
             link.unbind();
             link.click(function() { changeFormat(format['id'], lines); });
-            links.push(link);
+            links.append(element('li').append(link));
         }
     });
+
+    return links;
 }
 
 // TODO
