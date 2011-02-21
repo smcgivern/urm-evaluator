@@ -28,13 +28,11 @@ function element(name, attributes, content) {
     return e;
 }
 
+// TODO
 // onload:
 //  - add list of sample programs
 //  - insert onchange function for program -> parses, displays in textarea,
 //    and evaluates program
-// evaluate:
-//  - shows output in default format
-//  - displays alternative formats
 $(document).ready(function() {
     addRegisterRow();
     addControls();
