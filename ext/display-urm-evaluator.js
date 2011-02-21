@@ -71,7 +71,7 @@ function addRegisterRow() {
         var input = element('input',
                             {'id': 'r-'+(i+1), 'value': 0, 'type': 'text'});
 
-        input.click(showResults);
+        input.change(showResults);
         row.append(label);
         row.append(element('dd').append(input));
     }
