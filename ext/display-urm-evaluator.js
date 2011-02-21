@@ -89,7 +89,7 @@ function showResults(format) {
 
     var results = runURM(program, registers, 1, []);
 
-    changeFormat(currentFormat, results);
+    changeFormat(currentFormat, [results]);
 }
 
 function collapseHeader() { expandCollapseHeader(this, 'collapse'); }
