@@ -141,14 +141,34 @@ function showFormats(currentFormat, lines) {
     return links;
 }
 
-// TODO
 function tableFormat(lines) {
+    var filledLines = fillZeroes(lines);
+    var table = element('table');
+    var headerRow = element('tr');
+    var tableBody = element('tbody');
+
+    headerRow.append(element('td', {}, 'Instruction'));
+
+    for (var i = 1; i < filledLines[0].length; i++) {
+        headerRow.append(element('td').
+                         append(element('i', {}, 'r')).
+                         append(element('sub', {}, i)));
+    }
+
+    $.each(filledLines, function(i, line) {
+        var row = element('tr');
+
+        $.each(line, function(j, c) { row.append(element('td', {}, '' + c)); });
+
+        tableBody.append(row);
+    });
+
+    return table.append(element('thead').append(headerRow)).append(tableBody);
 }
 
-function wrappedTexFormat(lines) {
-    return element('textarea', {}, texFormat(lines));
+function wrapFormat(lines, func) {
+    return element('textarea', {'rows': lines.length + 1}, func(lines));
 }
 
-function wrappedPlainTextFormat(lines) {
-    return element('textarea', {}, plainTextFormat(lines));
-}
+function wrappedTexFormat(l) { return wrapFormat(l, texFormat); }
+function wrappedPlainTextFormat(l) { return wrapFormat(l, plainTextFormat); }
