@@ -51,7 +51,8 @@ function addRegisterRow() {
     var start = $('#registers input').length;
     var rows = $('#registers dl').length;
 
-    var row = element('div', {'id': 'registers-' + rows}).append(element('dl'));
+    var div = element('div', {'id': 'registers-' + rows});
+    var row = element('dl');
     var controls = element('div', {'class': 'controls'})
     var add = element('span', {'class': 'click'}, '+');
     var remove = element('span', {'class': 'click'}, '-');
@@ -76,8 +77,10 @@ function addRegisterRow() {
         row.append(element('dd').append(input));
     }
 
-    row.append(controls);
-    $('#registers').append(row);
+    div.append(controls);
+    div.append(row);
+
+    $('#registers').append(div);
 }
 
 // TODO
