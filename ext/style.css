@@ -1,8 +1,78 @@
+body {
+    max-width: 50em;
+    margin: 0em auto;
+}
+
 .controls {
     float: right;
     font-size: small;
 }
 
-.click {
-    cursor: pointer;
+h2 {
+    clear: both;
+}
+
+#samples h2, #registers h2 {
+    padding-top: 0.5em;
+}
+
+dt {
+    font-weight: bold;
+}
+
+#samples dt, #instructions dt {
+    clear: left;
+    float: left;
+    width: 10em;
+}
+
+#samples dd, #instructions dd {
+    float: left;
+}
+
+#registers input {
+    width: 2em;
+}
+
+#registers dt, #registers dd {
+    display: inline-block;
+    margin: 0em;
+}
+
+#registers dt {
+    width: 2em;
+    text-align: right;
+    padding-right: 0.5em;
+}
+
+#registers dd {
+    margin-right: 5em;
+    clear: both;
+}
+
+#program textarea {
+    width: 80%;
+    min-height: 20ex;
+}
+
+#parsed-program {
+    float: right;
+}
+
+#parsed-program pre {
+    margin: 0em;
+}
+
+#results table, #results textarea {
+    width: 100%;
+}
+
+#results ul {
+    text-align: center;
+}
+
+#results li {
+    display: inline;
+    list-style-type: none;
+    padding-right: 5em;
 }

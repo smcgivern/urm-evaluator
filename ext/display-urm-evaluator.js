@@ -60,14 +60,11 @@ function element(name, attributes, content) {
     return e;
 }
 
-// TODO
-// onload:
-//  - add list of sample programs
-//  - insert onchange function for program -> parses, displays in textarea,
-//    and evaluates program
 $(document).ready(function() {
-    addRegisterRow();
     addControls();
+    addSamplePrograms();
+    addRegisterRow();
+    $('#input-program').keyup(handleTextArea);
 });
 
 function addControls() {
@@ -77,6 +74,23 @@ function addControls() {
     expandCollapseHeader(collapse, 'collapse', true);
 
     $('h2').append(controls.append('[ ').append(collapse).append(' ]'));
+}
+
+function addSamplePrograms() {
+    var samples = element('dl');
+
+    $.each(samplePrograms, function(i, sample) {
+        var title = element('dt', {'class': 'click'}, sample['name']);
+        var description = element('dd');
+
+        title.click(loadSample(sample['id']));
+        description.html(sample['description']);
+
+        samples.append(title);
+        samples.append(description);
+    });
+
+    $('#samples').append(samples);
 }
 
 function addRegisterRow() {
@@ -115,14 +129,20 @@ function addRegisterRow() {
     $('#registers').append(div);
 }
 
-// TODO
+function handleTextArea() {
+    $(this).attr('rows', $(this).val().split('\n').length);
+    showResults();
+}
+
 function showResults(format) {
-    var program = parseURM($('#program textarea').val());
+    var program = parseURM($('#input-program').val());
     var registers = $.map($('#registers input'), function(register) {
         return parseInt('0' + $(register).val().replace(/\D/g, ''), 10);
     });
 
     var results = runURM(program, registers, 1, []);
+
+    $('#parsed-program pre').html(displayURM(program));
 
     changeFormat(currentFormat, [results]);
 }
@@ -146,6 +166,17 @@ function expandCollapseHeader(elem, mode, arrowsOnly) {
 }
 
 function removeRegisterRow() { $('#registers>div').last().remove(); }
+
+function loadSample(sampleID) {
+    var program = ($.grep(samplePrograms, function(sample) {
+        return (sample['id'] == sampleID);
+    })[0] || samplePrograms[0])['program'];
+
+    return function() {
+        $('#input-program').val(displayURM(program));
+        $('#input-program').keyup();
+    };
+}
 
 function changeFormat(newFormat, lines) {
     var results = $('#results');
