@@ -1,17 +1,49 @@
 var samplePrograms = [
-    {'id': 'addition', 'name': 'Addition', 'program': [
-        [allInstructions['j'], [2, 3, 5]],
-        [allInstructions['s'], [1]],
-        [allInstructions['s'], [3]],
-        [allInstructions['j'], [1, 1, 1]],
-        [allInstructions['z'], [3]]
+    {'id': 'addition', 'name': 'Addition',
+     'description': 'Adds the contents of <i>r</i><sub>1</sub> and <i>r</i><sub>2</sub>',
+     'program': [
+         [allInstructions['j'], [2, 3, 5]],
+         [allInstructions['s'], [1]],
+         [allInstructions['s'], [3]],
+         [allInstructions['j'], [1, 1, 1]],
+         [allInstructions['z'], [2]],
+         [allInstructions['z'], [3]]
+     ]},
+    {'id': 'subtraction', 'name': 'Subtraction',
+     'description': 'Subtracts <i>r</i><sub>1</sub> from <i>r</i><sub>2</sub> (fails if <i>r</i><sub>1</sub> &gt; <i>r</i><sub>2</sub>)',
+     'program': [
+         [allInstructions['j'], [1, 2, 5]],
+         [allInstructions['s'], [1]],
+         [allInstructions['s'], [3]],
+         [allInstructions['j'], [1, 1, 1]],
+         [allInstructions['z'], [2]],
+         [allInstructions['z'], [3]]
+    ]},
+    {'id': 'multiplication', 'name': 'Multiplication',
+     'description': 'Multiplies <i>r</i><sub>1</sub> and <i>r</i><sub>2</sub>',
+     'program': [
+         [allInstructions['j'], [1, 3, 12]],
+         [allInstructions['j'], [2, 3, 11]],
+         [allInstructions['t'], [3, 1]],
+         [allInstructions['s'], [5]],
+         [allInstructions['j'], [2, 5, 11]],
+         [allInstructions['z'], [4]],
+         [allInstructions['s'], [3]],
+         [allInstructions['s'], [4]],
+         [allInstructions['j'], [1, 4, 4]],
+         [allInstructions['j'], [1, 1, 7]],
+         [allInstructions['t'], [1, 3]],
+         [allInstructions['z'], [2]],
+         [allInstructions['z'], [3]],
+         [allInstructions['z'], [4]],
+         [allInstructions['z'], [5]]
     ]}
 ];
 
 var formats = [
-    {'id': 'table', 'name': 'table format', 'function': tableFormat},
+    {'id': 'table', 'name': 'Table format', 'function': tableFormat},
     {'id': 'tex', 'name': 'TeX format', 'function': wrappedTexFormat},
-    {'id': 'plain', 'name': 'plain text format',
+    {'id': 'plain', 'name': 'Plain text format',
      'function': wrappedPlainTextFormat}
 ]
 
