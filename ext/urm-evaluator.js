@@ -49,7 +49,7 @@ function runURM(program, registers, i, log) {
 
 function displayURM(program) {
     function displayURMLine(line) {
-        return line[0].names[0][0].toUpperCase() +
+        return line[0].names[0].charAt(0).toUpperCase() +
             '(' + line.slice(1)[0].join(', ') + ')';
     }
 
@@ -67,7 +67,8 @@ function parseURM(text) {
             var match = $.grep(allInstructions[i]['names'], function(name) {
                 var firstLetter = line.match(/[A-z]/);
 
-                return (firstLetter && name[0] == firstLetter[0].toLowerCase());
+                return (firstLetter &&
+                        name.charAt(0) == firstLetter.toString().toLowerCase());
             });
 
             if (match[0]) { var instruction = allInstructions[i]; break; }
