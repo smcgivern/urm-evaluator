@@ -73,7 +73,7 @@ function addControls() {
 
     expandCollapseHeader(collapse, 'collapse', true);
 
-    $('h2').append(controls.append('[ ').append(collapse).append(' ]'));
+    $('h2').prepend(controls.append('[ ').append(collapse).append(' ]'));
 }
 
 function addSamplePrograms() {
