@@ -26,10 +26,6 @@ dt {
     width: 10em;
 }
 
-#samples dd, #instructions dd {
-    float: left;
-}
-
 #registers input {
     width: 2em;
 }
