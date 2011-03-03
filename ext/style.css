@@ -33,6 +33,9 @@ dt {
 #registers dt, #registers dd {
     display: inline-block;
     margin: 0em;
+    /* IE hacks */
+    zoom: 1;
+    *display: inline;
 }
 
 #registers dt {
@@ -42,7 +45,7 @@ dt {
 }
 
 #registers dd {
-    margin-right: 5em;
+    margin-right: 4em;
     clear: both;
 }
 
