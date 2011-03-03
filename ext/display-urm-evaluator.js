@@ -142,7 +142,7 @@ function showResults(format) {
 
     var results = runURM(program, registers, 1, []);
 
-    $('#parsed-program pre').html(displayURM(program));
+    $('#parsed-program pre').html(addLineBreaks(displayURM(program)));
 
     changeFormat(currentFormat, [results]);
 }
@@ -177,6 +177,8 @@ function loadSample(sampleID) {
         $('#input-program').keyup();
     };
 }
+
+function addLineBreaks(text) { return text.replace(/\n/g, "<br>"); }
 
 function changeFormat(newFormat, lines) {
     var results = $('#results');
