@@ -234,9 +234,13 @@ function tableFormat(lines) {
     return table.append(element('thead').append(headerRow)).append(tableBody);
 }
 
-function wrapFormat(lines, func) {
-    return element('textarea', {'rows': lines.length + 1}, func(lines));
-}
-
 function wrappedTexFormat(l) { return wrapFormat(l, texFormat); }
 function wrappedPlainTextFormat(l) { return wrapFormat(l, plainTextFormat); }
+
+function wrapFormat(lines, func) {
+    var elem = element('textarea', {'rows': lines.length + 1});
+
+    elem.val(func(lines));
+
+    return elem;
+}
