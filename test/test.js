@@ -57,8 +57,8 @@ new Test.Unit.Runner({
     }},
 
     testTransfer: function() { with(this) {
-        assert(arrayEqual(t([2, 3, 4], 5, 2, 1), [[2, 2, 4], 5]));
-        assert(arrayEqual(t([2, 3, 4], 6, 2, 5), [[2, 0, 4], 6]));
+        assert(arrayEqual(t([2, 3, 4], 5, 2, 1), [[3, 3, 4], 5]));
+        assert(arrayEqual(t([2, 3, 4], 6, 5, 2), [[2, 0, 4], 6]));
     }},
 
     testJump: function() { with(this) {
