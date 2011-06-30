@@ -16,6 +16,7 @@ var samplePrograms = [
          [allInstructions['s'], [1]],
          [allInstructions['s'], [3]],
          [allInstructions['j'], [1, 1, 1]],
+         [allInstructions['t'], [3, 1]],
          [allInstructions['z'], [2]],
          [allInstructions['z'], [3]]
     ]},
