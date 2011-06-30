@@ -25,7 +25,7 @@ var samplePrograms = [
      'program': [
          [allInstructions['j'], [1, 3, 12]],
          [allInstructions['j'], [2, 3, 11]],
-         [allInstructions['t'], [3, 1]],
+         [allInstructions['t'], [1, 3]],
          [allInstructions['s'], [5]],
          [allInstructions['j'], [2, 5, 11]],
          [allInstructions['z'], [4]],
@@ -33,7 +33,7 @@ var samplePrograms = [
          [allInstructions['s'], [4]],
          [allInstructions['j'], [1, 4, 4]],
          [allInstructions['j'], [1, 1, 7]],
-         [allInstructions['t'], [1, 3]],
+         [allInstructions['t'], [3, 1]],
          [allInstructions['z'], [2]],
          [allInstructions['z'], [3]],
          [allInstructions['z'], [4]],
