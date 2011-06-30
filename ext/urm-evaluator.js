@@ -1,6 +1,6 @@
 var z = replaceIndex(zero);
 var s = replaceIndex(successor);
-var t = replaceIndex(transfer);
+var t = replaceIndex(transfer, true);
 
 function j(registers, next, m, n, p) {
     return [registers, registers[m - 1] == registers[n - 1] ? p : next];
@@ -16,18 +16,19 @@ var allInstructions = {
 
 function zero(registers, n) { return 0; }
 function successor(registers, n) { return orZero(registers, n - 1) + 1; }
-function transfer(registers, n, m) { return orZero(registers, m - 1); }
+function transfer(registers, m, n) { return orZero(registers, m - 1); }
 function orZero(arr, i) { return parseInt('0' + arr[i], 10); }
 
-function replaceIndex(func, name) {
+function replaceIndex(func, second) {
     var newFunction = function(registers, next, n, m) {
         var newRegisters = registers.slice(0);
-        newRegisters[n - 1] = func(registers, n, m);
+        var j = (second == true ? m : n) - 1;
+
+        newRegisters[j] = func(registers, n, m);
 
         return [newRegisters, next];
     };
 
-    newFunction.prototype.name = name;
     return newFunction;
 }
 
