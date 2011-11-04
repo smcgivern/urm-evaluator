@@ -117,7 +117,7 @@ function addRegisterRow() {
             append(element('sub', {}, i+1));
 
         var input = element('input',
-                            {'id': 'r-'+(i+1), 'value': 0, 'type': 'text'});
+                            {'id': 'r-'+(i+1), 'value': 0, 'type': 'number'});
 
         input.change(showResults);
         row.append(label);
